@@ -249,60 +249,79 @@ export function QuoteForm() {
                     Détails du projet
                   </h2>
 
-                  <FormField
-                    control={form.control}
-                    name="projectType"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Type de projet</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="pagesCount"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nombre de pages</FormLabel>
                           <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez un type de projet" />
-                            </SelectTrigger>
+                            <Input type="number" min="1" {...field} />
                           </FormControl>
-                          <SelectContent>
-                            <SelectItem value="static">
-                              Site statique
-                            </SelectItem>
-                            <SelectItem value="wordpress">
-                              Site WordPress
-                            </SelectItem>
-                            <SelectItem value="strapi">
-                              Site avec Strapi CMS
-                            </SelectItem>
-                            <SelectItem value="ecommerce">
-                              E-commerce
-                            </SelectItem>
-                            <SelectItem value="headless">
-                              Headless CMS
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="projectType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Type de projet</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Sélectionnez un type de projet" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="static">
+                                Site statique
+                              </SelectItem>
+                              <SelectItem value="wordpress">
+                                Site WordPress
+                              </SelectItem>
+                              <SelectItem value="strapi">
+                                Site avec Strapi CMS
+                              </SelectItem>
+                              <SelectItem value="ecommerce">
+                                E-commerce
+                              </SelectItem>
+                              <SelectItem value="headless">
+                                Headless CMS
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <FormField
-                    control={form.control}
-                    name="existingWebsiteUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>URL du site existant (optionnel)</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="https://www.example.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                      control={form.control}
+                      name="existingWebsiteUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            URL du site existant (optionnel)
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="https://www.example.com"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   <FormField
                     control={form.control}
@@ -316,20 +335,6 @@ export function QuoteForm() {
                             className="resize-none h-32"
                             {...field}
                           />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="pagesCount"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Nombre de pages</FormLabel>
-                        <FormControl>
-                          <Input type="number" min="1" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

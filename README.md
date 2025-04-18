@@ -1,6 +1,6 @@
 # Devisio
 
-Générateur de devis simple pour des prestations d'intégration web (sites statiques, CMS, etc.). Application sans backend, avec exportation en PDF.
+Générateur de devis simple pour des prestations d'intégration web (sites statiques, CMS, etc.).
 
 ## Fonctionnalités
 
@@ -9,7 +9,7 @@ Générateur de devis simple pour des prestations d'intégration web (sites stat
 - Aperçu du devis généré
 - Exportation du devis en format PDF
 
-## Technologies utilisées
+## Technos utilisées
 
 - **Next.js 14**
 
@@ -24,8 +24,8 @@ Générateur de devis simple pour des prestations d'intégration web (sites stat
 
 - **Tailwind CSS**
 
-  - Framework utilitaire permettant de créer rapidement des interfaces propres avec des classes de style atomiques.
-  - Configuration personnalisée (`tailwind.config.js`) pour définir la palette neutre (noirs, blancs, gris) et les tokens de typographie/espacement.
+  - Framework utilitaire permettant de créer rapidement des interfaces propres.
+  - Configuration personnalisée (`tailwind.config.js`).
 
 - **React Hook Form**
 
@@ -39,7 +39,7 @@ Générateur de devis simple pour des prestations d'intégration web (sites stat
 
 - **jsPDF**
 
-  - Génération de documents PDF côté client, sans serveur.
+  - Génération de documents PDF côté client.
   - Création d’un document PDF à partir du contenu HTML/JS et styles appliqués.
 
 - **jsPDF-AutoTable**
@@ -53,28 +53,34 @@ Générateur de devis simple pour des prestations d'intégration web (sites stat
 
 ## Informations requises dans le formulaire
 
-### Informations client
+### Informations du demandeur
 
-Nom complet
-
-- Adresse e-mail
-- Numéro de téléphone (optionnel)
+- Prénom
+- Nom
+- Email
+- Nom de l'entreprise (optionnel)
+- Secteur d'activité (optionnel)
 
 ### Détails du projet
 
-- Type de prestation : site statique, CMS, e‑commerce, etc.
-- Description du projet
-- Délai souhaité
-- Projet urgent : oui/non
+- Type de projet : Sélectionnez un type de projet
+- URL du site existant (optionnel)
+- Description du projet : Décrivez votre projet et les fonctionnalités souhaitées...
+- Nombre de pages
 
-### Fichiers fournis
+### Budget et délai
 
-- Maquettes (Figma, Adobe XD, etc.)
-- Contenus (textes, images)
+- Budget estimé: Sélectionnez une fourchette de budget
+- Délai souhaité : Sélectionnez un délai
+- Projet urgent : Cochez cette case si votre projet nécessite une livraison prioritaire (+25% sur le tarif)
 
-### Exportation en PDF
+### Options supplémentaires ( à cocher )
 
-Le devis est généré en format PDF côté client à l’aide de jsPDF et jsPDF-AutoTable. Le fichier peut être téléchargé directement depuis l’interface.
+- Responsive : par défaut, le site sera responsive
+- Hébergement : Inclure un forfait d'hébergement
+- Maintenance : Inclure un forfait de maintenance
+- SEO : Inclure l'optimisation pour les moteurs de recherche
 
-Licence
+## Licence
+
 Ce projet est sous licence MIT.
