@@ -80,7 +80,3 @@ Générateur de devis simple pour des prestations d'intégration web (sites stat
 - Hébergement : Inclure un forfait d'hébergement
 - Maintenance : Inclure un forfait de maintenance
 - SEO : Inclure l'optimisation pour les moteurs de recherche
-
-## Licence
-
-Ce projet est sous licence MIT.
