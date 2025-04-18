@@ -67,20 +67,22 @@ const formSchema = z.object({
   deadline: z.string({
     required_error: "Veuillez sélectionner un délai.",
   }),
-  isUrgent: z.boolean().default(false),
+  isUrgent: z.boolean(),
 
   // Options supplémentaires
-  needsHosting: z.boolean().default(false),
-  needsMaintenance: z.boolean().default(false),
-  needsSEO: z.boolean().default(false),
-  isResponsive: z.boolean().default(true),
+  needsHosting: z.boolean(),
+  needsMaintenance: z.boolean(),
+  needsSEO: z.boolean(),
+  isResponsive: z.boolean(),
   pagesCount: z.string().min(1, {
     message: "Veuillez indiquer le nombre de pages.",
   }),
 });
 
 export function QuoteForm() {
-  const [quoteData, setQuoteData] = useState(null);
+  // Define QuoteData type based on what calculateQuote returns, or import it if it exists elsewhere
+  type QuoteData = ReturnType<typeof calculateQuote>;
+  const [quoteData, setQuoteData] = useState<QuoteData | null>(null);
   const [activeTab, setActiveTab] = useState("form");
 
   const form = useForm<z.infer<typeof formSchema>>({
