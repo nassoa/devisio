@@ -1,5 +1,5 @@
-import { QuoteForm } from "@/components/quote-form"
-import { QuoteHeader } from "@/components/quote-header"
+import { QuoteForm } from "@/components/quote-form";
+import { QuoteHeader } from "@/components/quote-header";
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  )
+  );
 }

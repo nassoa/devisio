@@ -138,7 +138,11 @@ export function QuoteForm() {
 
   return (
     <>
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="w-full lg:px-32"
+      >
         <TabsList className="grid w-full grid-cols-2 mb-8">
           <TabsTrigger value="form">Formulaire</TabsTrigger>
           <TabsTrigger value="preview" disabled={!quoteData}>
@@ -338,77 +342,83 @@ export function QuoteForm() {
                     Budget et délai
                   </h2>
 
-                  <FormField
-                    control={form.control}
-                    name="estimatedBudget"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Budget estimé</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez une fourchette de budget" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="1000-3000">
-                              1 000€ - 3 000€
-                            </SelectItem>
-                            <SelectItem value="3000-5000">
-                              3 000€ - 5 000€
-                            </SelectItem>
-                            <SelectItem value="5000-10000">
-                              5 000€ - 10 000€
-                            </SelectItem>
-                            <SelectItem value="10000-20000">
-                              10 000€ - 20 000€
-                            </SelectItem>
-                            <SelectItem value="20000+">
-                              Plus de 20 000€
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="estimatedBudget"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Budget estimé</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Sélectionnez une fourchette de budget" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="1000-3000">
+                                1 000€ - 3 000€
+                              </SelectItem>
+                              <SelectItem value="3000-5000">
+                                3 000€ - 5 000€
+                              </SelectItem>
+                              <SelectItem value="5000-10000">
+                                5 000€ - 10 000€
+                              </SelectItem>
+                              <SelectItem value="10000-20000">
+                                10 000€ - 20 000€
+                              </SelectItem>
+                              <SelectItem value="20000+">
+                                Plus de 20 000€
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <FormField
-                    control={form.control}
-                    name="deadline"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Délai souhaité</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Sélectionnez un délai" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="1-2-weeks">
-                              1-2 semaines
-                            </SelectItem>
-                            <SelectItem value="2-4-weeks">
-                              2-4 semaines
-                            </SelectItem>
-                            <SelectItem value="1-2-months">1-2 mois</SelectItem>
-                            <SelectItem value="3-6-months">3-6 mois</SelectItem>
-                            <SelectItem value="6-months+">
-                              Plus de 6 mois
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                      control={form.control}
+                      name="deadline"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Délai souhaité</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Sélectionnez un délai" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="1-2-weeks">
+                                1-2 semaines
+                              </SelectItem>
+                              <SelectItem value="2-4-weeks">
+                                2-4 semaines
+                              </SelectItem>
+                              <SelectItem value="1-2-months">
+                                1-2 mois
+                              </SelectItem>
+                              <SelectItem value="3-6-months">
+                                3-6 mois
+                              </SelectItem>
+                              <SelectItem value="6-months+">
+                                Plus de 6 mois
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   <FormField
                     control={form.control}
@@ -439,6 +449,27 @@ export function QuoteForm() {
                   </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="isResponsive"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel>Responsive</FormLabel>
+                            <FormDescription>
+                              Site adapté à tous les appareils
+                            </FormDescription>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
                     <FormField
                       control={form.control}
                       name="needsHosting"
@@ -502,31 +533,10 @@ export function QuoteForm() {
                         </FormItem>
                       )}
                     />
-
-                    <FormField
-                      control={form.control}
-                      name="isResponsive"
-                      render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <div className="space-y-1 leading-none">
-                            <FormLabel>Responsive</FormLabel>
-                            <FormDescription>
-                              Site adapté à tous les appareils
-                            </FormDescription>
-                          </div>
-                        </FormItem>
-                      )}
-                    />
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-fit">
                   Générer le devis
                 </Button>
               </form>

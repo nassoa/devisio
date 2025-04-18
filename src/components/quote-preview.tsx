@@ -1,63 +1,88 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Download, Mail, ArrowLeft, Loader2, FileText, Calendar, Building, User, FileTerminal } from "lucide-react"
-import { generatePDF } from "@/lib/pdf-generator"
-import { formatCurrency, getProjectTypeName, getDeadlineName } from "@/lib/utils"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Download,
+  Mail,
+  ArrowLeft,
+  Loader2,
+  FileText,
+  Calendar,
+  Building,
+  User,
+  FileTerminal,
+} from "lucide-react";
+import { generatePDF } from "@/lib/pdf-generator";
+import {
+  formatCurrency,
+  getProjectTypeName,
+  getDeadlineName,
+} from "@/lib/utils";
 
 interface QuoteItem {
-  description: string
-  quantity: number
-  unitPrice: number
-  total: number
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
 }
 
 interface QuoteData {
-  items: QuoteItem[]
-  subtotal: number
-  tax: number
-  total: number
-  urgentFee?: number
+  items: QuoteItem[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  urgentFee?: number;
 }
 
 interface QuotePreviewProps {
-  quoteData: QuoteData
-  formData: any
-  onSendEmail: () => Promise<void>
-  onBack: () => void
+  quoteData: QuoteData;
+  formData: any;
+  onSendEmail: () => Promise<void>;
+  onBack: () => void;
 }
 
-export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: QuotePreviewProps) {
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
-  const [isSendingEmail, setIsSendingEmail] = useState(false)
-  const [showCGV, setShowCGV] = useState(false)
+export function QuotePreview({
+  quoteData,
+  formData,
+  onSendEmail,
+  onBack,
+}: QuotePreviewProps) {
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [showCGV, setShowCGV] = useState(false);
 
   const handleDownloadPDF = async () => {
-    setIsGeneratingPDF(true)
+    setIsGeneratingPDF(true);
     try {
-      await generatePDF(quoteData, formData)
+      await generatePDF(quoteData, formData);
     } catch (error) {
-      console.error("Error generating PDF:", error)
+      console.error("Error generating PDF:", error);
     } finally {
-      setIsGeneratingPDF(false)
+      setIsGeneratingPDF(false);
     }
-  }
+  };
 
   const handleSendEmail = async () => {
-    setIsSendingEmail(true)
+    setIsSendingEmail(true);
     try {
-      await onSendEmail()
+      await onSendEmail();
     } finally {
-      setIsSendingEmail(false)
+      setIsSendingEmail(false);
     }
-  }
+  };
 
   // Générer un numéro de référence aléatoire
   const refNumber = `WEB-${Math.floor(Math.random() * 10000)
     .toString()
-    .padStart(4, "0")}`
+    .padStart(4, "0")}`;
 
   return (
     <Card className="w-full overflow-hidden border-0 shadow-lg">
@@ -94,24 +119,36 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
                     <span>{formData.companyName}</span>
                   </div>
                 )}
-                {formData.companySector && <p className="text-gray-600">Secteur: {formData.companySector}</p>}
+                {formData.companySector && (
+                  <p className="text-gray-600">
+                    Secteur: {formData.companySector}
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
-              <h3 className="font-semibold text-teal-700 mb-3">Détails du projet</h3>
+              <h3 className="font-semibold text-teal-700 mb-3">
+                Détails du projet
+              </h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Type:</span>
-                  <span className="font-medium text-gray-800">{getProjectTypeName(formData.projectType)}</span>
+                  <span className="font-medium text-gray-800">
+                    {getProjectTypeName(formData.projectType)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Délai:</span>
-                  <span className="font-medium text-gray-800">{getDeadlineName(formData.deadline)}</span>
+                  <span className="font-medium text-gray-800">
+                    {getDeadlineName(formData.deadline)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Pages:</span>
-                  <span className="font-medium text-gray-800">{formData.pagesCount}</span>
+                  <span className="font-medium text-gray-800">
+                    {formData.pagesCount}
+                  </span>
                 </div>
                 {formData.isUrgent && (
                   <div className="mt-2 bg-orange-100 text-orange-600 font-medium p-2 rounded text-center">
@@ -124,7 +161,9 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
         </div>
 
         <div className="p-6">
-          <h3 className="font-semibold text-teal-700 mb-4 border-b pb-2">Détail du devis</h3>
+          <h3 className="font-semibold text-teal-700 mb-4 border-b pb-2">
+            Détail du devis
+          </h3>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -157,9 +196,16 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {quoteData.items.map((item, index) => (
-                  <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.description}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{item.quantity}</td>
+                  <tr
+                    key={index}
+                    className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {item.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                      {item.quantity}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
                       {formatCurrency(item.unitPrice)}
                     </td>
@@ -194,15 +240,21 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
 
             <div className="flex justify-between items-center py-3 font-bold text-lg border-t border-gray-300 mt-2 pt-2">
               <span>Total</span>
-              <span className="text-teal-700">{formatCurrency(quoteData.total)}</span>
+              <span className="text-teal-700">
+                {formatCurrency(quoteData.total)}
+              </span>
             </div>
           </div>
         </div>
 
         <div className="p-6">
           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <h3 className="font-semibold text-teal-700 mb-2">Description du projet</h3>
-            <p className="text-sm text-gray-600">{formData.projectDescription}</p>
+            <h3 className="font-semibold text-teal-700 mb-2">
+              Description du projet
+            </h3>
+            <p className="text-sm text-gray-600">
+              {formData.projectDescription}
+            </p>
           </div>
 
           <div className="mt-4 flex items-center">
@@ -218,7 +270,9 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
 
           {showCGV && (
             <div className="mt-4 bg-gray-50 p-4 rounded-lg border border-gray-200 max-h-60 overflow-y-auto">
-              <h3 className="font-semibold text-teal-700 mb-2">Conditions Générales de Vente</h3>
+              <h3 className="font-semibold text-teal-700 mb-2">
+                Conditions Générales de Vente
+              </h3>
               <p className="text-xs text-gray-600 italic mb-2">
                 Les CGV complètes sont incluses dans le PDF téléchargeable.
               </p>
@@ -226,21 +280,25 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
                 <p>
                   <strong>Article 1 - DISPOSITIONS GÉNÉRALES</strong>
                   <br />
-                  Les présentes Conditions Générales de Vente (CGV) s'appliquent à toutes les prestations de services
-                  conclues par le Prestataire auprès de ses clients...
+                  Les présentes Conditions Générales de Vente (CGV) s'appliquent
+                  à toutes les prestations de services conclues par le
+                  Prestataire auprès de ses clients...
                 </p>
                 <p>
                   <strong>Article 2 - DEVIS ET COMMANDES</strong>
                   <br />
-                  Les devis établis par le Prestataire sont valables pendant une durée de 30 jours à compter de leur
-                  date d'émission...
+                  Les devis établis par le Prestataire sont valables pendant une
+                  durée de 30 jours à compter de leur date d'émission...
                 </p>
                 <p>
                   <strong>Article 3 - TARIFS</strong>
                   <br />
-                  Les prix des services sont ceux détaillés dans le devis, exprimés en euros et soumis à la TVA...
+                  Les prix des services sont ceux détaillés dans le devis,
+                  exprimés en euros et soumis à la TVA...
                 </p>
-                <p className="text-center italic">[Version complète dans le PDF]</p>
+                <p className="text-center italic">
+                  [Version complète dans le PDF]
+                </p>
               </div>
             </div>
           )}
@@ -267,17 +325,21 @@ export function QuotePreview({ quoteData, formData, onSendEmail, onBack }: Quote
             Télécharger en PDF
           </Button>
 
-          <Button
+          {/* <Button
             onClick={handleSendEmail}
             disabled={isSendingEmail}
             className="w-full sm:w-auto bg-teal-700 hover:bg-teal-800"
             variant="default"
           >
-            {isSendingEmail ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Mail className="mr-2 h-4 w-4" />}
+            {isSendingEmail ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Mail className="mr-2 h-4 w-4" />
+            )}
             Envoyer par email
-          </Button>
+          </Button> */}
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
